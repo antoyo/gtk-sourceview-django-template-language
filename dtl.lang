@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Author: Antoni Boucher <bouanto@hotmail.com>
+ Copyright (C) 2010-2011 Antoni Boucher <bouanto@hotmail.com>
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ Boston, MA 02111-1307, USA.
+
+-->
+<language id="dtl" _name="Django template language" version="2.0" _section="Scripts">
+    <metadata>
+        <property name="mimetypes">text/html</property>
+        <property name="globs">*.html;*.htm;*.tpl</property>
+    </metadata>
+    
+    <styles>
+        <style id="commentaire" _name="Commentaire" map-to="def:comment"/>
+        <style id="chaineG" _name="Chaîne de caractères" map-to="def:string"/>
+        <style id="chaineA" _name="Chaîne de caractères" map-to="def:string"/>
+        <style id="included-file" _name="Included File" map-to="def:string"/>
+        <style id="motCle" _name="Mot-clé" map-to="def:keyword"/>
+        <style id="filtre" _name="Filtre" map-to="def:keyword"/>
+        <style id="variable" _name="Variable" map-to="def:identifier"/>
+        <style id="operateur" _name="Opérateur" map-to="def:operator"/>
+        <style id="nombre" _name="Nombre" map-to="def:number"/>
+    </styles>
+    
+    <definitions>
+        
+        <context id="comment-multiline" style-ref="commentaire">
+            <start>{% ?comment ?%}</start>
+            <end>{% ?endcomment ?%}</end>
+            <include>
+                <context ref="def:in-comment"/>
+            </include>
+        </context>
+        
+        <context id="commentaire" end-at-line-end="true" style-ref="commentaire">
+            <start>{#</start>
+            <end>#}</end>
+        </context>
+        
+        <context id="variable" style-ref="variable">
+            <match>[a-zA-Z_][a-zA-Z0-9_\.]*</match>
+        </context>
+        
+        <context id="chaineG" end-at-line-end="true" style-ref="chaineG">
+            <start>"</start>
+            <end>"</end>
+        </context>
+        
+        <context id="chaineA" end-at-line-end="true" style-ref="chaineA">
+            <start>'</start>
+            <end>'</end>
+        </context>
+        
+        <context id="motsCles" style-ref="motCle">
+            <keyword>autoescape</keyword>
+            <keyword>endautoescape</keyword>
+            <keyword>block</keyword>
+            <keyword>endblock</keyword>
+            <keyword>csrf_token</keyword>
+            <keyword>cycle</keyword>
+            <keyword>debug</keyword>
+            <keyword>extends</keyword>
+            <keyword>else</keyword>
+            <keyword>filter</keyword>
+            <keyword>endfilter</keyword>
+            <keyword>firstof</keyword>
+            <keyword>for</keyword>
+            <keyword>endfor</keyword>
+            <keyword>empty</keyword>
+            <keyword>if</keyword>
+            <keyword>endif</keyword>
+            <keyword>not</keyword>
+            <keyword>in</keyword>
+            <keyword>ifchanged</keyword>
+            <keyword>endifchanged</keyword>
+            <keyword>ifequal</keyword>
+            <keyword>endifequal</keyword>
+            <keyword>ifnotequal</keyword>
+            <keyword>endifnotequal</keyword>
+            <keyword>include</keyword>
+            <keyword>load</keyword>
+            <keyword>now</keyword>
+            <keyword>regroup</keyword>
+            <keyword>spaceless</keyword>
+            <keyword>endspaceless</keyword>
+            <keyword>ssi</keyword>
+            <keyword>templatetag</keyword>
+            <keyword>url</keyword>
+            <keyword>widthratio</keyword>
+            <keyword>with</keyword>
+            <keyword>endwith</keyword>
+            <keyword>and</keyword>
+            <keyword>or</keyword>
+            <keyword>regroup</keyword>
+            <keyword>as</keyword>
+            <keyword>lorem</keyword>
+            <keyword>trans</keyword>
+            <keyword>blocktrans</keyword>
+            <keyword>endblocktrans</keyword>
+            <keyword>plural</keyword>
+            <keyword>get_current_language</keyword>
+            <keyword>get_available_languages</keyword>
+            <keyword>get_current_language_bidi</keyword>
+        </context>
+        
+        <context id="filtres" style-ref="filtre">
+            <prefix>^|</prefix>
+            <keyword>add</keyword>
+            <keyword>addslashes</keyword>
+            <keyword>capfirst</keyword>
+            <keyword>center</keyword>
+            <keyword>cut</keyword>
+            <keyword>date</keyword>
+            <keyword>default</keyword>
+            <keyword>default_if_none</keyword>
+            <keyword>dictsort</keyword>
+            <keyword>dictsortreversed</keyword>
+            <keyword>divisibleby</keyword>
+            <keyword>escape</keyword>
+            <keyword>escapejs</keyword>
+            <keyword>filesizeformat</keyword>
+            <keyword>first</keyword>
+            <keyword>fix_ampersands</keyword>
+            <keyword>floatformat</keyword>
+            <keyword>force_escape</keyword>
+            <keyword>get_digit</keyword>
+            <keyword>iriencode</keyword>
+            <keyword>join</keyword>
+            <keyword>last</keyword>
+            <keyword>length</keyword>
+            <keyword>length_is</keyword>
+            <keyword>linebreaks</keyword>
+            <keyword>linebreaksbr</keyword>
+            <keyword>linenumbers</keyword>
+            <keyword>ljust</keyword>
+            <keyword>lower</keyword>
+            <keyword>make_list</keyword>
+            <keyword>phone2numeric</keyword>
+            <keyword>pluralize</keyword>
+            <keyword>pprint</keyword>
+            <keyword>random</keyword>
+            <keyword>removetags</keyword>
+            <keyword>rjust</keyword>
+            <keyword>safe</keyword>
+            <keyword>safeseq</keyword>
+            <keyword>slice</keyword>
+            <keyword>slugify</keyword>
+            <keyword>stringformat</keyword>
+            <keyword>striptags</keyword>
+            <keyword>time</keyword>
+            <keyword>timesince</keyword>
+            <keyword>timeuntil</keyword>
+            <keyword>title</keyword>
+            <keyword>truncatewords</keyword>
+            <keyword>truncatewords_html</keyword>
+            <keyword>unordered_list</keyword>
+            <keyword>upper</keyword>
+            <keyword>urlencode</keyword>
+            <keyword>urlize</keyword>
+            <keyword>urlizetrunc</keyword>
+            <keyword>wordcount</keyword>
+            <keyword>wordwrap</keyword>
+            <keyword>yesno</keyword>
+            <keyword>apnumber</keyword>
+            <keyword>intcomma</keyword>
+            <keyword>intword</keyword>
+            <keyword>ordinal</keyword>
+            <keyword>naturalday</keyword>
+        </context>
+        
+        <context id="operateur" style-ref="operateur">
+            <match>(\=\=|\!\=|&lt;\=|&gt;\=|&gt;|&lt;|\=)</match>
+        </context>
+        
+        <context id="nombre" style-ref="nombre">
+            <match>[0-9]*</match>
+        </context>
+        
+        <context id="variable-block" end-at-line-end="true">
+            <start>{{</start>
+            <end>}}</end>
+            <include>
+                <context sub-pattern="0" where="start" style-ref="motCle"/>
+                <context sub-pattern="0" where="end" style-ref="motCle"/>
+                <context ref="chaineG"/>
+                <context ref="chaineA"/>
+                <context ref="filtres"/>
+                <context ref="motsCles"/>
+                <context ref="nombre"/>
+                <context ref="variable"/>
+            </include>
+        </context>
+        
+        <context id="dtl-block" end-at-line-end="true">
+            <start>{%</start>
+            <end>%}</end>
+            <include>
+                <context sub-pattern="0" where="start" style-ref="motCle"/>
+                <context sub-pattern="0" where="end" style-ref="motCle"/>
+                <context ref="commentaire"/>
+                <context ref="chaineG"/>
+                <context ref="chaineA"/>
+                <context ref="motsCles"/>
+                <context ref="filtres"/>
+                <context ref="operateur"/>
+                <context ref="nombre"/>
+                <context ref="variable"/>
+            </include>
+        </context>
+        
+        <context id="django">
+            <include>
+                <context ref="comment-multiline"/>
+                <context ref="commentaire"/>
+                <context ref="dtl-block"/>
+                <context ref="variable-block"/>
+            </include>
+        </context>
+        
+        <replace id="html:embedded-lang-hook" ref="django"/>
+        
+        <context id="dtl" class="no-spell-check">
+            <include>
+                <context ref="django"/>
+                <context ref="html:html"/>
+            </include>
+        </context>
+    </definitions>
+</language>
